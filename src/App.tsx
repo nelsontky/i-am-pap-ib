@@ -1,13 +1,13 @@
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import HelpIcon from "@material-ui/icons/Help";
 import CopyContentIcon from "./utils/CopyContentIcon";
 import Typography from "@material-ui/core/Typography";
 import { IconButton, Tooltip, Snackbar } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   FacebookShareButton,
@@ -83,8 +83,9 @@ function getCommentIndex(currCommentIndex?: number): number {
 
 function App() {
   const [index, setIndex] = useState(parseInt(window.location.hash.slice(1)));
-  const isIndexValid = !isNaN(index) || index < 0 || index >= comments.length;
+  const isIndexValid = !isNaN(index) && index >= 0 && index < comments.length;
 
+  const history = useHistory();
   if (!isIndexValid) {
     setIndex(getCommentIndex());
   }
@@ -92,6 +93,10 @@ function App() {
   const classes = useStyles();
 
   const [isCopiedSnackbarShown, setIsCopiedSnackBarShown] = useState(false);
+
+  useEffect(() => {
+    history.push(PATH + "/#" + index);
+  }, [index]);
 
   function copyToClipboard(str: string) {
     const el: HTMLTextAreaElement = document.createElement("textarea");
@@ -106,116 +111,105 @@ function App() {
   }
 
   return (
-    <>
-      <Redirect to={PATH + "/#" + index} />
-      <div className={classes.root}>
-        <Card className={classes.card}>
-          <CardContent className={classes.cardContent}>
-            <Typography className={classes.openQuote}>“</Typography>
-            <Typography>{comments[index]}</Typography>
-            <Typography className={classes.closeQuote}>”</Typography>
-          </CardContent>
-          <CardActions>
-            <div className={classes.actionsLeft}>
-              <Tooltip title="Generate comment" placement="top">
-                <IconButton
-                  aria-label="generate comment"
-                  onClick={() => {
-                    setIndex(getCommentIndex(index));
-                  }}
-                >
-                  <RefreshIcon />
-                </IconButton>
+    <div className={classes.root}>
+      <Card className={classes.card}>
+        <CardContent className={classes.cardContent}>
+          <Typography className={classes.openQuote}>“</Typography>
+          <Typography>{comments[index]}</Typography>
+          <Typography className={classes.closeQuote}>”</Typography>
+        </CardContent>
+        <CardActions>
+          <div className={classes.actionsLeft}>
+            <Tooltip title="Generate comment" placement="top">
+              <IconButton
+                aria-label="generate comment"
+                onClick={() => {
+                  setIndex(getCommentIndex(index));
+                }}
+              >
+                <RefreshIcon />
+              </IconButton>
+            </Tooltip>
+
+            <Tooltip title={"Copy to clipboard"} placement="top">
+              <IconButton
+                aria-label="copy comment"
+                onClick={() => {
+                  copyToClipboard(comments[index]);
+                  setIsCopiedSnackBarShown(true);
+                }}
+              >
+                <CopyContentIcon />
+              </IconButton>
+            </Tooltip>
+
+            <div className={classes.shareButtons}>
+              <Tooltip title="Share to Facebook" placement="top">
+                <div>
+                  <FacebookShareButton
+                    url={"https://nelsontky.github.io/I-AM-A-PAP-IB/#" + index}
+                    quote={comments[index]}
+                  >
+                    <FacebookIcon size={32} round />
+                  </FacebookShareButton>
+                </div>
               </Tooltip>
-
-              <Tooltip title={"Copy to clipboard"} placement="top">
-                <IconButton
-                  aria-label="copy comment"
-                  onClick={() => {
-                    copyToClipboard(comments[index]);
-                    setIsCopiedSnackBarShown(true);
-                  }}
-                >
-                  <CopyContentIcon />
-                </IconButton>
+              <Tooltip title="Share to Telegram" placement="top">
+                <div>
+                  <TelegramShareButton
+                    url={"https://nelsontky.github.io/I-AM-A-PAP-IB/#" + index}
+                    title={comments[index]}
+                  >
+                    <TelegramIcon size={32} round />
+                  </TelegramShareButton>
+                </div>
               </Tooltip>
-
-              <div className={classes.shareButtons}>
-                <Tooltip title="Share to Facebook" placement="top">
-                  <div>
-                    <FacebookShareButton
-                      url={
-                        "https://nelsontky.github.io/I-AM-A-PAP-IB/#" + index
-                      }
-                      quote={comments[index]}
-                    >
-                      <FacebookIcon size={32} round />
-                    </FacebookShareButton>
-                  </div>
-                </Tooltip>
-                <Tooltip title="Share to Telegram" placement="top">
-                  <div>
-                    <TelegramShareButton
-                      url={
-                        "https://nelsontky.github.io/I-AM-A-PAP-IB/#" + index
-                      }
-                      title={comments[index]}
-                    >
-                      <TelegramIcon size={32} round />
-                    </TelegramShareButton>
-                  </div>
-                </Tooltip>
-                <Tooltip title="Share to Twitter" placement="top">
-                  <div>
-                    <TwitterShareButton
-                      url={
-                        "https://nelsontky.github.io/I-AM-A-PAP-IB/#" + index
-                      }
-                      title={comments[index]}
-                    >
-                      <TwitterIcon size={32} round />
-                    </TwitterShareButton>
-                  </div>
-                </Tooltip>
-                <Tooltip title="Share to Whatsapp" placement="top">
-                  <div>
-                    <WhatsappShareButton
-                      url={
-                        "https://nelsontky.github.io/I-AM-A-PAP-IB/#" + index
-                      }
-                      title={comments[index]}
-                    >
-                      <WhatsappIcon size={32} round />
-                    </WhatsappShareButton>
-                  </div>
-                </Tooltip>
-              </div>
-            </div>
-
-            <div className={classes.actionsRight}>
-              <Tooltip title="About this site" placement="top">
-                <IconButton
-                  aria-label="about this site"
-                  target="_blank"
-                  href="https://github.com/nelsontky/I-AM-A-PAP-IB/blob/master/README.md"
-                  rel="noopener noreferrer"
-                >
-                  <HelpIcon />
-                </IconButton>
+              <Tooltip title="Share to Twitter" placement="top">
+                <div>
+                  <TwitterShareButton
+                    url={"https://nelsontky.github.io/I-AM-A-PAP-IB/#" + index}
+                    title={comments[index]}
+                  >
+                    <TwitterIcon size={32} round />
+                  </TwitterShareButton>
+                </div>
+              </Tooltip>
+              <Tooltip title="Share to Whatsapp" placement="top">
+                <div>
+                  <WhatsappShareButton
+                    url={"https://nelsontky.github.io/I-AM-A-PAP-IB/#" + index}
+                    title={comments[index]}
+                  >
+                    <WhatsappIcon size={32} round />
+                  </WhatsappShareButton>
+                </div>
               </Tooltip>
             </div>
-          </CardActions>
-        </Card>
+          </div>
 
-        <Snackbar
-          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-          open={isCopiedSnackbarShown}
-          onClose={() => setIsCopiedSnackBarShown(false)}
-          message="Comment copied to clipboard!"
-          autoHideDuration={5000}
-        />
-      </div>
-    </>
+          <div className={classes.actionsRight}>
+            <Tooltip title="About this site" placement="top">
+              <IconButton
+                aria-label="about this site"
+                target="_blank"
+                href="https://github.com/nelsontky/I-AM-A-PAP-IB/blob/master/README.md"
+                rel="noopener noreferrer"
+              >
+                <HelpIcon />
+              </IconButton>
+            </Tooltip>
+          </div>
+        </CardActions>
+      </Card>
+
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        open={isCopiedSnackbarShown}
+        onClose={() => setIsCopiedSnackBarShown(false)}
+        message="Comment copied to clipboard!"
+        autoHideDuration={5000}
+      />
+    </div>
   );
 }
 
