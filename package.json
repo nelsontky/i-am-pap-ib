@@ -2,7 +2,7 @@
   "name": "i-am-pap-ib",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://nelsontky.github.io/I-AM-A-PAP-IB",
+  "homepage": "https://nelsontky.github.io/I-AM-A-PAP-IB/",
   "dependencies": {
     "@material-ui/core": "^4.10.2",
     "@material-ui/icons": "^4.9.1",
