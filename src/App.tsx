@@ -3,6 +3,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import React, { useState } from "react";
 import RefreshIcon from "@material-ui/icons/Refresh";
+import HelpIcon from "@material-ui/icons/Help";
 import CopyContentIcon from "./utils/CopyContentIcon";
 import Typography from "@material-ui/core/Typography";
 import { IconButton, Tooltip, Snackbar } from "@material-ui/core";
@@ -48,12 +49,23 @@ const useStyles = makeStyles({
     userSelect: "none",
     alignSelf: "flex-end",
   },
-  actions: {
+  actionsLeft: {
     display: "flex",
     flexWrap: "wrap",
+    width: "75%",
   },
-  firstShareButton: {
-    marginLeft: "12px",
+  shareButtons: {
+    display: "flex",
+    marginLeft: "12px !important",
+    "& div": {
+      marginRight: "8px",
+      alignSelf: "center",
+    },
+  },
+  actionsRight: {
+    display: "flex",
+    justifyContent: "flex-end",
+    width: "25%",
   },
 });
 
@@ -117,74 +129,87 @@ function CommentCard({ setId }: CommentCardProps) {
           <Typography>{comments[index]}</Typography>
           <Typography className={classes.closeQuote}>”</Typography>
         </CardContent>
-        <CardActions className={classes.actions}>
-          <Tooltip title="Generate comment" placement="top">
-            <IconButton
-              aria-label="generate comment"
-              onClick={() => {
-                setId(getCommentIndex(index));
-              }}
-            >
-              <RefreshIcon />
-            </IconButton>
-          </Tooltip>
+        <CardActions>
+          <div className={classes.actionsLeft}>
+            <Tooltip title="Generate comment" placement="top">
+              <IconButton
+                aria-label="generate comment"
+                onClick={() => {
+                  setId(getCommentIndex(index));
+                }}
+              >
+                <RefreshIcon />
+              </IconButton>
+            </Tooltip>
 
-          <Tooltip title={"Copy to clipboard"} placement="top">
-            <IconButton
-              aria-label="copy comment"
-              onClick={() => {
-                copyToClipboard(comments[index]);
-                setIsCopiedSnackBarShown(true);
-              }}
-            >
-              <CopyContentIcon />
-            </IconButton>
-          </Tooltip>
+            <Tooltip title={"Copy to clipboard"} placement="top">
+              <IconButton
+                aria-label="copy comment"
+                onClick={() => {
+                  copyToClipboard(comments[index]);
+                  setIsCopiedSnackBarShown(true);
+                }}
+              >
+                <CopyContentIcon />
+              </IconButton>
+            </Tooltip>
 
-          <Tooltip title="Share to Facebook" placement="top">
-            <div>
-              <FacebookShareButton
-                url={window.location.href}
-                quote={comments[index]}
-              >
-                <FacebookIcon
-                  className={classes.firstShareButton}
-                  size={32}
-                  round
-                />
-              </FacebookShareButton>
+            <div className={classes.shareButtons}>
+              <Tooltip title="Share to Facebook" placement="top">
+                <div>
+                  <FacebookShareButton
+                    url={window.location.href}
+                    quote={comments[index]}
+                  >
+                    <FacebookIcon size={32} round />
+                  </FacebookShareButton>
+                </div>
+              </Tooltip>
+              <Tooltip title="Share to Telegram" placement="top">
+                <div>
+                  <TelegramShareButton
+                    url={window.location.href}
+                    title={comments[index]}
+                  >
+                    <TelegramIcon size={32} round />
+                  </TelegramShareButton>
+                </div>
+              </Tooltip>
+              <Tooltip title="Share to Twitter" placement="top">
+                <div>
+                  <TwitterShareButton
+                    url={window.location.href}
+                    title={comments[index]}
+                  >
+                    <TwitterIcon size={32} round />
+                  </TwitterShareButton>
+                </div>
+              </Tooltip>
+              <Tooltip title="Share to Whatsapp" placement="top">
+                <div>
+                  <WhatsappShareButton
+                    url={window.location.href}
+                    title={comments[index]}
+                  >
+                    <WhatsappIcon size={32} round />
+                  </WhatsappShareButton>
+                </div>
+              </Tooltip>
             </div>
-          </Tooltip>
-          <Tooltip title="Share to Telegram" placement="top">
-            <div>
-              <TelegramShareButton
-                url={window.location.href}
-                title={comments[index]}
+          </div>
+
+          <div className={classes.actionsRight}>
+            <Tooltip title="About this site" placement="top">
+              <IconButton
+                aria-label="about this site"
+                target="_blank"
+                href="https://github.com/nelsontky/I-AM-A-PAP-IB/blob/master/README.md"
+                rel="noopener noreferrer"
               >
-                <TelegramIcon size={32} round />
-              </TelegramShareButton>
-            </div>
-          </Tooltip>
-          <Tooltip title="Share to Twitter" placement="top">
-            <div>
-              <TwitterShareButton
-                url={window.location.href}
-                title={comments[index]}
-              >
-                <TwitterIcon size={32} round />
-              </TwitterShareButton>
-            </div>
-          </Tooltip>
-          <Tooltip title="Share to Whatsapp" placement="top">
-            <div>
-              <WhatsappShareButton
-                url={window.location.href}
-                title={comments[index]}
-              >
-                <WhatsappIcon size={32} round />
-              </WhatsappShareButton>
-            </div>
-          </Tooltip>
+                <HelpIcon />
+              </IconButton>
+            </Tooltip>
+          </div>
         </CardActions>
       </Card>
 
