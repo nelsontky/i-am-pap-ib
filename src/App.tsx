@@ -96,7 +96,7 @@ function App() {
 
   useEffect(() => {
     history.push(PATH + "/#" + index);
-  }, [index]);
+  }, [index, history]);
 
   function copyToClipboard(str: string) {
     const el: HTMLTextAreaElement = document.createElement("textarea");
