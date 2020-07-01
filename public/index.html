@@ -2,12 +2,38 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+    <meta
+      name="viewport"
+      content="minimum-scale=1, initial-scale=1, width=device-width"
+    />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="%PUBLIC_URL%/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="%PUBLIC_URL%/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="%PUBLIC_URL%/favicon-16x16.png"
+    />
+    <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="AI generated Facebook comments ripe for the best PAP IBs to post on social media!"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
@@ -24,20 +50,65 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>I AM A PAP IB</title>
+    <style>
+      .iframe-container {
+        position: fixed;
+        z-index: -99;
+        width: 100%;
+        height: 100%;
+      }
+      #player {
+        -ms-zoom: 1.25;
+        -moz-transform: scale(1.25);
+        -o-transform: scale(1.25);
+        -webkit-transform: scale(1.25);
+        -zoom: 1.25;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        min-width: 1280px;
+        min-height: 720px;
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div class="iframe-container"><div id="player"></div></div>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    <!-- 1. The <iframe> (video player) will replace this <div> tag. -->
+    <script>
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement("script");
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName("script")[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player("player", {
+          height: "390",
+          width: "640",
+          videoId: "nUCNIpgIrTM",
+          events: {
+            onReady: onPlayerReady,
+            onStateChange: (e) => {
+              if (e.data === YT.PlayerState.ENDED) {
+                player.playVideo();
+              }
+            },
+          },
+        });
+      }
+
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        event.target.playVideo();
+        event.target.mute();
+      }
+    </script>
   </body>
 </html>
