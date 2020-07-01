@@ -57,7 +57,7 @@ const useStyles = makeStyles({
   actionsLeft: {
     display: "flex",
     flexWrap: "wrap",
-    width: "75%",
+    width: "90%",
   },
   shareButtons: {
     display: "flex",
@@ -70,7 +70,7 @@ const useStyles = makeStyles({
   actionsRight: {
     display: "flex",
     justifyContent: "flex-end",
-    width: "25%",
+    width: "10%",
   },
 });
 
