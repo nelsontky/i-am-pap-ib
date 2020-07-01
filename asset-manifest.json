@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/I-AM-A-PAP-IB/static/css/main.34de6062.chunk.css",
-    "main.js": "/I-AM-A-PAP-IB/static/js/main.4c911bfa.chunk.js",
-    "main.js.map": "/I-AM-A-PAP-IB/static/js/main.4c911bfa.chunk.js.map",
+    "main.js": "/I-AM-A-PAP-IB/static/js/main.b526e55b.chunk.js",
+    "main.js.map": "/I-AM-A-PAP-IB/static/js/main.b526e55b.chunk.js.map",
     "runtime-main.js": "/I-AM-A-PAP-IB/static/js/runtime-main.5c9c83dd.js",
     "runtime-main.js.map": "/I-AM-A-PAP-IB/static/js/runtime-main.5c9c83dd.js.map",
     "static/js/2.04695c71.chunk.js": "/I-AM-A-PAP-IB/static/js/2.04695c71.chunk.js",
     "static/js/2.04695c71.chunk.js.map": "/I-AM-A-PAP-IB/static/js/2.04695c71.chunk.js.map",
     "index.html": "/I-AM-A-PAP-IB/index.html",
-    "precache-manifest.4d811cec07acebeb247bbd7047ca36dc.js": "/I-AM-A-PAP-IB/precache-manifest.4d811cec07acebeb247bbd7047ca36dc.js",
+    "precache-manifest.376420cb18c37ecf05199e7a6679a70b.js": "/I-AM-A-PAP-IB/precache-manifest.376420cb18c37ecf05199e7a6679a70b.js",
     "service-worker.js": "/I-AM-A-PAP-IB/service-worker.js",
     "static/css/main.34de6062.chunk.css.map": "/I-AM-A-PAP-IB/static/css/main.34de6062.chunk.css.map",
     "static/js/2.04695c71.chunk.js.LICENSE.txt": "/I-AM-A-PAP-IB/static/js/2.04695c71.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.5c9c83dd.js",
     "static/js/2.04695c71.chunk.js",
     "static/css/main.34de6062.chunk.css",
-    "static/js/main.4c911bfa.chunk.js"
+    "static/js/main.b526e55b.chunk.js"
   ]
 }
