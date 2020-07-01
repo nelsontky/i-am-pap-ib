@@ -24,10 +24,7 @@ import {
 
 import comments from "./utils/comments.json";
 
-const PATH =
-  process.env.NODE_ENV === "development"
-    ? ""
-    : "/I-AM-A-PAP-IB";
+const PATH = process.env.NODE_ENV === "development" ? "" : "/I-AM-A-PAP-IB";
 
 const useStyles = makeStyles({
   root: {
@@ -147,7 +144,9 @@ function App() {
                 <Tooltip title="Share to Facebook" placement="top">
                   <div>
                     <FacebookShareButton
-                      url={window.location.href}
+                      url={
+                        "https://nelsontky.github.io/I-AM-A-PAP-IB/#" + index
+                      }
                       quote={comments[index]}
                     >
                       <FacebookIcon size={32} round />
@@ -157,7 +156,9 @@ function App() {
                 <Tooltip title="Share to Telegram" placement="top">
                   <div>
                     <TelegramShareButton
-                      url={window.location.href}
+                      url={
+                        "https://nelsontky.github.io/I-AM-A-PAP-IB/#" + index
+                      }
                       title={comments[index]}
                     >
                       <TelegramIcon size={32} round />
@@ -167,7 +168,9 @@ function App() {
                 <Tooltip title="Share to Twitter" placement="top">
                   <div>
                     <TwitterShareButton
-                      url={window.location.href}
+                      url={
+                        "https://nelsontky.github.io/I-AM-A-PAP-IB/#" + index
+                      }
                       title={comments[index]}
                     >
                       <TwitterIcon size={32} round />
@@ -177,7 +180,9 @@ function App() {
                 <Tooltip title="Share to Whatsapp" placement="top">
                   <div>
                     <WhatsappShareButton
-                      url={window.location.href}
+                      url={
+                        "https://nelsontky.github.io/I-AM-A-PAP-IB/#" + index
+                      }
                       title={comments[index]}
                     >
                       <WhatsappIcon size={32} round />
