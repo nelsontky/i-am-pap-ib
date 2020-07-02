@@ -33,17 +33,19 @@ const useStyles = makeStyles({
   },
   card: {
     margin: "100px 40px 100px 40px",
-    maxWidth: "800px",
+    width: "800px",
     borderRadius: "18px",
   },
   cardContent: {
     display: "flex",
     flexDirection: "column",
+    alignItems: "center",
   },
   openQuote: {
     fontSize: 48,
     fontWeight: 600,
     userSelect: "none",
+    alignSelf: "flex-start",
   },
   closeQuote: {
     fontSize: 48,
@@ -113,11 +115,6 @@ function App() {
   return (
     <div className={classes.root}>
       <Card className={classes.card}>
-        <CardContent className={classes.cardContent}>
-          <Typography className={classes.openQuote}>“</Typography>
-          <Typography>{comments[index]}</Typography>
-          <Typography className={classes.closeQuote}>”</Typography>
-        </CardContent>
         <CardActions>
           <div className={classes.actionsLeft}>
             <Tooltip title="Generate comment" placement="top">
@@ -200,6 +197,12 @@ function App() {
             </Tooltip>
           </div>
         </CardActions>
+
+        <CardContent className={classes.cardContent}>
+          <Typography className={classes.openQuote}>“</Typography>
+          <Typography>{comments[index]}</Typography>
+          <Typography className={classes.closeQuote}>”</Typography>
+        </CardContent>
       </Card>
 
       <Snackbar
